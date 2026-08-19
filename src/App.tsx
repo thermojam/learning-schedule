@@ -70,7 +70,7 @@ function OverviewPage() {
     return (
         <div className="h-full flex flex-col">
             <PageHeader/>
-            <div className="flex-1 flex flex-col gap-2.5">
+            <div className="flex-1 flex flex-col gap-4">
                 <div className="grid grid-cols-[1fr_235px] gap-2.5">
                     <CourseTable/>
                     <ProgressTracker/>
@@ -185,7 +185,7 @@ export default function App() {
 
             {/* Screen view — active page only */}
             <div className="no-print">
-                <div className="print-page bg-anthracite p-5">
+                <div className="print-page bg-anthracite p-6">
                     {currentPage === 0 ? (
                         <OverviewPage/>
                     ) : (
@@ -205,11 +205,11 @@ export default function App() {
 
             {/* Print view — all 7 pages */}
             <div className="print-only hidden">
-                <div className="print-page bg-anthracite p-5">
+                <div className="print-page bg-anthracite p-6">
                     <OverviewPage/>
                 </div>
                 {weeks.map((week, i) => (
-                    <div key={i} className="print-page bg-anthracite p-5">
+                    <div key={i} className="print-page bg-anthracite p-6">
                         <PageHeader
                             subtitle={`Неделя ${week.weekNumber} из 6 • ${week.dateRange} • ${week.title}`}
                         />
