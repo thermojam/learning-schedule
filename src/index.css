@@ -1,111 +1,185 @@
+@import "tailwindcss";
+
+/* ============================================
+   DARK THEME (default) — Anthropic dark identity
+   ============================================ */
+@theme {
+    --color-anthracite: #0b0b0a;
+    --color-charcoal: #191919;
+    --color-card: #1a1a19;
+    --color-card-hover: #222221;
+    --color-stripe: #212120; /* zebra rows + table headers */
+    --color-code: #0d0d0c;
+    --color-border: #2D2D2D;
+    --color-border-light: #3a3a39;
+    --color-cream: #FBFBFA;
+    --color-cream-dim: #a8a8a2;
+    --color-cream-muted: #6b6b65;
+    --color-clay: #E0533C;
+    --color-clay-light: #E87A5D;
+    --color-clay-dim: #c44a35;
+    --color-amber: #D4A853;
+    --color-amber-dim: #b08e42;
+    --color-green-accent: #5BBD72;
+    --color-green-dim: #3d8a4e;
+    --color-blue-accent: #5B8FBD;
+    --color-purple-accent: #8B6BBD;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-    --text: #6b6375;
-    --text-h: #08060d;
-    --bg: #fff;
-    --border: #e5e4e7;
-    --code-bg: #f4f3ec;
-    --accent: #aa3bff;
-    --accent-bg: rgba(170, 59, 255, 0.1);
-    --accent-border: rgba(170, 59, 255, 0.5);
-    --social-bg: rgba(244, 243, 236, 0.5);
-    --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    color-scheme: dark;
+    --page-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    --glow-clay: 0 0 20px rgba(224, 83, 60, 0.2);
+    --stripe-alpha: rgba(255, 255, 255, 0.012);
+}
 
-    --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-    --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-    --mono: ui-monospace, Consolas, monospace;
+/* ============================================
+   LIGHT THEME — Anthropic ivory / bone identity
+   ============================================ */
+html.light {
+    color-scheme: light;
 
-    font: 18px/145% var(--sans);
-    letter-spacing: 0.18px;
-    color-scheme: light dark;
-    color: var(--text);
-    background: var(--bg);
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
+    --color-anthracite: #F0EEE6; /* page background — Anthropic bone */
+    --color-charcoal: #FAF9F5;   /* subtle surface / table headers */
+    --color-card: #FFFFFF;       /* card surface */
+    --color-card-hover: #F6F5EF;
+    --color-stripe: #F4F2E9;     /* zebra rows + table headers */
+    --color-code: #F4F2EA;
+    --color-border: #DEDBD0;
+    --color-border-light: #C7C3B6;
+    --color-cream: #191917;      /* primary text */
+    --color-cream-dim: #56544C;  /* secondary text */
+    --color-cream-muted: #8B887E;/* tertiary text */
+    --color-clay: #C4402A;
+    --color-clay-light: #AE3E29;
+    --color-clay-dim: #96331F;
+    --color-amber: #946D18;
+    --color-amber-dim: #7A5A13;
+    --color-green-accent: #2E7D45;
+    --color-green-dim: #256437;
+    --color-blue-accent: #37678F;
+    --color-purple-accent: #66469A;
+
+    --page-shadow: 0 8px 40px rgba(60, 55, 40, 0.13), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    --glow-clay: 0 2px 10px rgba(196, 64, 42, 0.22);
+    --stripe-alpha: rgba(0, 0, 0, 0.018);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    @media (max-width: 1024px) {
-        font-size: 16px;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --text: #9ca3af;
-        --text-h: #f3f4f6;
-        --bg: #16171d;
-        --border: #2e303a;
-        --code-bg: #1f2028;
-        --accent: #c084fc;
-        --accent-bg: rgba(192, 132, 252, 0.15);
-        --accent-border: rgba(192, 132, 252, 0.5);
-        --social-bg: rgba(47, 48, 58, 0.5);
-        --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-    }
-
-    #social .button-icon {
-        filter: invert(1) brightness(2);
-    }
-}
-
-#root {
-    width: 1126px;
-    max-width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    border-inline: 1px solid var(--border);
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+    background: var(--color-anthracite);
 }
 
 body {
     margin: 0;
+    padding: 0;
+    background: var(--color-anthracite);
+    color: var(--color-cream);
+    transition: background-color 0.28s ease, color 0.28s ease;
 }
 
-h1,
-h2 {
-    font-family: var(--heading);
-    font-weight: 500;
-    color: var(--text-h);
+/* Smooth token transitions when switching theme */
+.theme-transition,
+.theme-transition * {
+    transition: background-color 0.28s ease, border-color 0.28s ease,
+    color 0.28s ease, box-shadow 0.28s ease !important;
 }
 
-h1 {
-    font-size: 56px;
-    letter-spacing: -1.68px;
-    margin: 32px 0;
-    @media (max-width: 1024px) {
-        font-size: 36px;
-        margin: 20px 0;
+/* Reusable helpers bound to theme */
+.page-shadow {
+    box-shadow: var(--page-shadow);
+}
+.glow-clay {
+    box-shadow: var(--glow-clay);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-light);
+}
+
+/* ============================================
+   PRINT — A4 Landscape (theme aware)
+   ============================================ */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 8mm 10mm;
+    }
+
+    html,
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        background: var(--color-anthracite) !important;
+        color: var(--color-cream) !important;
+    }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    .print-page {
+        page-break-after: always;
+        break-after: page;
+        width: 277mm;
+        min-height: 190mm;
+        max-height: 194mm;
+        overflow: hidden;
+        padding: 16px !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .print-page:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+    }
+
+    /* Never animate during print rasterisation */
+    .theme-transition,
+    .theme-transition * {
+        transition: none !important;
     }
 }
 
-h2 {
-    font-size: 24px;
-    line-height: 118%;
-    letter-spacing: -0.24px;
-    margin: 0 0 8px;
-    @media (max-width: 1024px) {
-        font-size: 20px;
+/* Screen presentation of the A4 sheet */
+@media screen {
+    .print-page {
+        width: 297mm;
+        min-height: 210mm;
+        margin: 20px auto;
+        box-shadow: var(--page-shadow);
+        border-radius: 4px;
+        overflow: hidden;
     }
-}
-
-p {
-    margin: 0;
-}
-
-code,
-.counter {
-    font-family: var(--mono);
-    display: inline-flex;
-    border-radius: 4px;
-    color: var(--text-h);
-}
-
-code {
-    font-size: 15px;
-    line-height: 135%;
-    padding: 4px 8px;
-    background: var(--code-bg);
 }
