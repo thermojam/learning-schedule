@@ -44,12 +44,12 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                 <table className="w-full text-[10.5px]">
                     <thead>
                     <tr className="border-b border-border bg-stripe/70">
-                        <th className="text-left px-2 py-1.5 text-cream-muted font-semibold w-14 uppercase tracking-wider text-[9.5px]">День</th>
-                        <th className="text-left px-2 py-1.5 text-cream-muted font-semibold w-24 uppercase tracking-wider text-[9.5px]">Время</th>
-                        <th className="text-left px-2 py-1.5 text-cream-muted font-semibold w-28 uppercase tracking-wider text-[9.5px]">Курс</th>
-                        <th className="text-left px-2 py-1.5 text-cream-muted font-semibold uppercase tracking-wider text-[9.5px]">Содержание</th>
-                        <th className="text-left px-2 py-1.5 text-cream-muted font-semibold uppercase tracking-wider text-[9.5px]">Практика</th>
-                        <th className="text-left px-2 py-1.5 text-cream-muted font-semibold w-32 uppercase tracking-wider text-[9.5px]">Результат</th>
+                        <th className="text-left px-3.5 py-2 text-cream-muted font-semibold w-16 uppercase tracking-wider text-[9.5px]">День</th>
+                        <th className="text-left px-3.5 py-2 text-cream-muted font-semibold w-26 uppercase tracking-wider text-[9.5px]">Время</th>
+                        <th className="text-left px-3.5 py-2 text-cream-muted font-semibold w-32 uppercase tracking-wider text-[9.5px]">Курс</th>
+                        <th className="text-left px-3.5 py-2 text-cream-muted font-semibold uppercase tracking-wider text-[9.5px]">Содержание</th>
+                        <th className="text-left px-3.5 py-2 text-cream-muted font-semibold uppercase tracking-wider text-[9.5px]">Практика</th>
+                        <th className="text-left px-3.5 py-2 text-cream-muted font-semibold w-36 uppercase tracking-wider text-[9.5px]">Результат</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,6 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                         const isRest = day.time === 'Отдых' || day.time === 'Рефлексия';
                         const isDeep = day.course.includes('Deep');
                         const isCert = day.resultIcon === 'cert';
-
                         return (
                             <tr
                                 key={i}
@@ -69,11 +68,11 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                     ${!isRest && !isDeep && !isCert ? (i % 2 === 0 ? 'bg-transparent' : 'bg-stripe/50') : ''}
                   `}
                             >
-                                <td className="px-2 py-[6px]">
+                                <td className="px-3.5 py-[7px]">
                                     <span className="font-bold text-cream">{day.day}</span>
                                     <span className="text-cream-muted text-[9px] ml-1">{day.date}</span>
                                 </td>
-                                <td className="px-2 py-[6px]">
+                                <td className="px-3.5 py-[7px]">
                     <span
                         className={`font-mono text-[10px] ${
                             isRest ? 'text-blue-accent' : isDeep ? 'text-clay-light' : 'text-cream-dim'
@@ -82,7 +81,7 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                       {day.time}
                     </span>
                                 </td>
-                                <td className="px-2 py-[6px]">
+                                <td className="px-3.5 py-[7px]">
                     <span
                         className={`text-[10px] font-medium ${
                             isRest ? 'text-cream-muted italic' : 'text-cream'
@@ -91,9 +90,9 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                       {day.course}
                     </span>
                                 </td>
-                                <td className="px-2 py-[6px] text-cream-dim">{day.content}</td>
-                                <td className="px-2 py-[6px] text-cream-dim">{day.practice}</td>
-                                <td className="px-2 py-[6px]">
+                                <td className="px-3.5 py-[7px] text-cream-dim">{day.content}</td>
+                                <td className="px-3.5 py-[7px] text-cream-dim">{day.practice}</td>
+                                <td className="px-3.5 py-[7px]">
                     <span
                         className={`flex items-center ${
                             isCert ? 'text-amber font-semibold' : 'text-cream-dim'
@@ -111,12 +110,12 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
             </div>
 
             {/* Bottom: Checklist + Notes + Code Snippets */}
-            <div className="grid grid-cols-3 gap-2 mt-2">
-                <div className="rounded-lg border border-border bg-card/40 px-2.5 py-2">
-                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+            <div className="grid grid-cols-3 gap-3.5 mt-3"> {/* Increased gap and margin */}
+                <div className="rounded-lg border border-border bg-card/40 px-3.5 py-3"> {/* Increased inner padding */}
+                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-2">
                         <CheckCircle className="w-3.5 h-3.5" weight="duotone"/> Чек-лист дня
                     </h3>
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                         {['Теория (видео/лекция)', 'Практика на проекте', 'Коммит / push', 'Заметки и snippets'].map(
                             (item, idx) => (
                                 <label
@@ -131,24 +130,22 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                         )}
                     </div>
                 </div>
-
-                <div className="rounded-lg border border-border bg-card/40 px-2.5 py-2">
-                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                <div className="rounded-lg border border-border bg-card/40 px-3.5 py-3"> {/* Increased inner padding */}
+                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-2">
                         <BookOpenText className="w-3.5 h-3.5" weight="duotone"/> Заметки
                     </h3>
-                    <div className="space-y-[7px]">
+                    <div className="space-y-[8px]">
                         {[1, 2, 3].map(l => (
-                            <div key={l} className="h-3 border-b border-border/25 border-dashed"/>
+                            <div key={l} className="h-3.5 border-b border-border/25 border-dashed"/>
                         ))}
                     </div>
                 </div>
-
-                <div className="rounded-lg border border-border bg-card/40 px-2.5 py-2">
-                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                <div className="rounded-lg border border-border bg-card/40 px-3.5 py-3"> {/* Increased inner padding */}
+                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-2">
                         <Code className="w-3.5 h-3.5" weight="duotone"/> Code Snippets
                     </h3>
                     <div
-                        className="font-mono text-[9px] text-cream-muted bg-code rounded px-2 py-1.5 border border-border/30 leading-relaxed min-h-[42px]">
+                        className="font-mono text-[9px] text-cream-muted bg-code rounded px-2.5 py-2 border border-border/30 leading-relaxed min-h-[46px]">
                         <span className="opacity-50">// your code here...</span>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ const trackGroups = [
 export default function ProgressTracker() {
     return (
         <div className="rounded-lg border border-border bg-card/60 backdrop-blur-sm overflow-hidden">
-            <div className="px-3 py-2 border-b border-border bg-stripe/70">
+            <div className="px-4 py-3 border-b border-border bg-stripe/70">
                 <h2 className="text-[13px] font-semibold text-cream tracking-wide uppercase flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-accent"/>
                     Прогресс по трекам
@@ -18,8 +18,8 @@ export default function ProgressTracker() {
             </div>
             <div className="px-3 py-2.5 space-y-2">
                 {trackGroups.map((g, i) => (
-                    <div key={i} className="flex items-center gap-2">
-            <span className="text-[10px] text-cream-dim w-[72px] text-right font-medium shrink-0">
+                    <div key={i} className="flex items-center py-4 gap-2">
+            <span className="text-[12px] text-cream-dim w-[72px] text-right font-medium shrink-0">
               {g.name}
             </span>
                         <div className="flex-1 h-2.5 bg-border/30 rounded-full overflow-hidden relative">

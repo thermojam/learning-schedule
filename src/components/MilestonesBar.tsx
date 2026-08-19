@@ -4,7 +4,7 @@ import { milestones } from '../data/schedule';
 export default function MilestonesBar() {
     return (
         <div className="rounded-lg border border-border bg-card/60 backdrop-blur-sm overflow-hidden">
-            <div className="px-3 py-2 border-b border-border bg-stripe/70">
+            <div className="px-4 py-3 border-b border-border bg-stripe/70">
                 <h2 className="text-[13px] font-semibold text-cream tracking-wide uppercase flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-accent" />
                     Контрольные точки маршрута
@@ -17,7 +17,7 @@ export default function MilestonesBar() {
                             <div className="absolute right-0 top-1/2 w-2 h-px bg-border-light translate-x-1" />
                         )}
                         <div className="flex items-center gap-2">
-              <span className="w-7 h-7 rounded-md bg-clay/10 border border-clay/20 flex items-center justify-center shrink-0">
+              <span className="w-8 h-8 rounded-md bg-clay/10 border border-clay/20 flex items-center justify-center shrink-0">
                 <TopicIcon name={m.icon} className="w-4 h-4 text-clay-light" />
               </span>
                             <div>
