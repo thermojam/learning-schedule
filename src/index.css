@@ -41,16 +41,16 @@ html.light {
     color-scheme: light;
 
     --color-anthracite: #F0EEE6; /* page background — Anthropic bone */
-    --color-charcoal: #FAF9F5;   /* subtle surface / table headers */
-    --color-card: #FFFFFF;       /* card surface */
+    --color-charcoal: #FAF9F5; /* subtle surface / table headers */
+    --color-card: #FFFFFF; /* card surface */
     --color-card-hover: #F6F5EF;
-    --color-stripe: #F4F2E9;     /* zebra rows + table headers */
+    --color-stripe: #F4F2E9; /* zebra rows + table headers */
     --color-code: #F4F2EA;
     --color-border: #DEDBD0;
     --color-border-light: #C7C3B6;
-    --color-cream: #191917;      /* primary text */
-    --color-cream-dim: #56544C;  /* secondary text */
-    --color-cream-muted: #8B887E;/* tertiary text */
+    --color-cream: #191917; /* primary text */
+    --color-cream-dim: #56544C; /* secondary text */
+    --color-cream-muted: #8B887E; /* tertiary text */
     --color-clay: #C4402A;
     --color-clay-light: #AE3E29;
     --color-clay-dim: #96331F;
@@ -96,6 +96,7 @@ body {
 .page-shadow {
     box-shadow: var(--page-shadow);
 }
+
 .glow-clay {
     box-shadow: var(--glow-clay);
 }
@@ -105,13 +106,16 @@ body {
     width: 6px;
     height: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background: var(--color-border);
     border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-border-light);
 }
