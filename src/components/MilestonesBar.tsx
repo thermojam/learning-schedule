@@ -10,11 +10,11 @@ export default function MilestonesBar() {
                     Контрольные точки маршрута
                 </h2>
             </div>
-            <div className="flex items-stretch divide-x divide-border/40">
+            <div className="flex flex-col divide-y divide-border/40 md:flex-row md:items-stretch md:divide-y-0 md:divide-x">
                 {milestones.map((m, i) => (
-                    <div key={i} className="flex-1 px-3 py-2 relative">
+                    <div key={i} className="md:flex-1 px-3 py-2.5 md:py-2 relative">
                         {i < milestones.length - 1 && (
-                            <div className="absolute right-0 top-1/2 w-2 h-px bg-border-light translate-x-1" />
+                            <div className="hidden md:block absolute right-0 top-1/2 w-2 h-px bg-border-light translate-x-1" />
                         )}
                         <div className="flex items-center gap-2">
               <span className="w-8 h-8 rounded-md bg-clay/10 border border-clay/20 flex items-center justify-center shrink-0">
