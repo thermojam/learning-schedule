@@ -41,7 +41,7 @@ const legendItems = [
 
 function Legend() {
     return (
-        <div className="flex items-center gap-3.5">
+        <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1">
             {legendItems.map(it => (
                 <span key={it.label} className="flex items-center gap-1.5 text-[10px] text-cream-muted">
           <span className={`w-2 h-2 rounded-full ${it.color}`}/>
@@ -71,19 +71,19 @@ function OverviewPage() {
         <div className="h-full flex flex-col">
             <PageHeader/>
             <div className="flex-1 flex flex-col gap-4">
-                <div className="grid grid-cols-[1fr_235px] gap-2.5">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_235px] gap-2.5">
                     <CourseTable/>
                     <ProgressTracker/>
                 </div>
                 <TimeRules/>
                 <MilestonesBar/>
-                <div className="flex items-center justify-between px-1">
+                <div className="flex flex-col gap-1.5 md:flex-row md:items-center md:justify-between px-1">
                     <Legend/>
                     <span className="text-[10px] text-cream-muted italic">
             Пропустил день — сдвиг, не отказ. Buffer — воскресенье.
           </span>
                 </div>
-                <div className="flex-1 grid grid-cols-3 gap-2.5">
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                     {summaryCards.map(card => (
                         <SummaryCard key={card.title} {...card} />
                     ))}
@@ -138,46 +138,51 @@ export default function App() {
         <div className="min-h-screen bg-anthracite">
             {/* Navigation — screen only */}
             <div className="no-print sticky top-0 z-50 bg-anthracite/95 backdrop-blur-md border-b border-border/50">
-                <div className="max-w-[297mm] mx-auto px-4 py-2 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                        <button onClick={() => goTo(0)} className={navButton(currentPage === 0)}>
+                <div
+                    className="max-w-[297mm] mx-auto px-2 py-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:px-4">
+                    <div
+                        className="flex items-center gap-1.5 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                        <button onClick={() => goTo(0)} className={navButton(currentPage === 0) + ' shrink-0'}>
                             <SquaresFour className="w-4 h-4" weight="duotone"/>
                             Обзор
                         </button>
                         {weeks.map((w, i) => (
-                            <button key={i} onClick={() => goTo(i + 1)} className={navButton(currentPage === i + 1)}>
+                            <button key={i} onClick={() => goTo(i + 1)}
+                                    className={navButton(currentPage === i + 1) + ' shrink-0'}>
                                 <CalendarBlank className="w-3.5 h-3.5" weight="duotone"/>
                                 <span className="hidden xl:inline">Нед.</span> {w.weekNumber}
                             </button>
                         ))}
                     </div>
-                    <div className="flex items-center gap-2">
-                        <button
-                            onClick={() => goTo(currentPage - 1)}
-                            disabled={currentPage === 0}
-                            className="p-1.5 rounded-md text-cream-muted hover:text-cream hover:bg-stripe disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                        >
-                            <CaretLeft className="w-4 h-4" weight="bold"/>
-                        </button>
-                        <span className="text-[12px] text-cream-muted font-mono px-1">
-              {currentPage + 1}/{totalPages}
-            </span>
-                        <button
-                            onClick={() => goTo(currentPage + 1)}
-                            disabled={currentPage === totalPages - 1}
-                            className="p-1.5 rounded-md text-cream-muted hover:text-cream hover:bg-stripe disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                        >
-                            <CaretRight className="w-4 h-4" weight="bold"/>
-                        </button>
-                        <div className="w-px h-5 bg-border mx-1"/>
-                        <ThemeToggle theme={theme} onToggle={toggleTheme}/>
-                        <div className="w-px h-5 bg-border mx-1"/>
+                    <div className="flex items-center justify-between gap-2 md:justify-end">
+                        <div className="flex items-center gap-1.5 md:gap-2">
+                            <button
+                                onClick={() => goTo(currentPage - 1)}
+                                disabled={currentPage === 0}
+                                className="p-1.5 rounded-md text-cream-muted hover:text-cream hover:bg-stripe disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                            >
+                                <CaretLeft className="w-4 h-4" weight="bold"/>
+                            </button>
+                            <span className="text-[12px] text-cream-muted font-mono px-1">
+                {currentPage + 1}/{totalPages}
+              </span>
+                            <button
+                                onClick={() => goTo(currentPage + 1)}
+                                disabled={currentPage === totalPages - 1}
+                                className="p-1.5 rounded-md text-cream-muted hover:text-cream hover:bg-stripe disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                            >
+                                <CaretRight className="w-4 h-4" weight="bold"/>
+                            </button>
+                            <div className="w-px h-5 bg-border mx-1"/>
+                            <ThemeToggle theme={theme} onToggle={toggleTheme}/>
+                        </div>
+                        <div className="w-px h-5 bg-border hidden md:block"/>
                         <button
                             onClick={() => window.print()}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium text-cream bg-clay/15 hover:bg-clay/25 border border-clay/25 transition-all"
+                            className="flex items-center gap-1.5 px-2.5 md:px-3 py-1.5 rounded-md text-[13px] font-medium text-cream bg-clay/15 hover:bg-clay/25 border border-clay/25 transition-all shrink-0"
                         >
                             <Printer className="w-4 h-4" weight="duotone"/>
-                            Печать / PDF
+                            <span className="hidden sm:inline">Печать / PDF</span>
                         </button>
                     </div>
                 </div>
@@ -185,7 +190,7 @@ export default function App() {
 
             {/* Screen view — active page only */}
             <div className="no-print">
-                <div className="print-page bg-anthracite p-6">
+                <div className="print-page bg-anthracite p-3 sm:p-4 md:p-6">
                     {currentPage === 0 ? (
                         <OverviewPage/>
                     ) : (
@@ -220,9 +225,9 @@ export default function App() {
 
             {/* Footer — screen only */}
             <div
-                className="no-print max-w-[297mm] mx-auto px-4 py-4 flex items-center justify-between text-[12px] text-cream-muted">
+                className="no-print max-w-[297mm] mx-auto px-4 py-4 flex flex-col gap-1 text-center md:flex-row md:items-center md:justify-between md:text-left text-[12px] text-cream-muted">
                 <span>Anthropic Learning Schedule • Никита • Старт 24.08.2026</span>
-                <span className="font-mono">← → страницы • T тема • ⌘P для PDF • A4 landscape</span>
+                <span className="font-mono hidden md:inline">← → страницы • T тема • ⌘P для PDF • A4 landscape</span>
             </div>
         </div>
     );
