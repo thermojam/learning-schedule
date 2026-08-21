@@ -10,7 +10,8 @@ export default function CourseTable() {
                     Сводная таблица маршрута
                 </h2>
             </div>
-            <table className="w-full text-[11.5px]">
+            {/* Tablet and up: table */}
+            <table className="w-full text-[11.5px] hidden md:table">
                 <thead>
                 <tr className="border-b border-border/60">
                     <th className="text-left px-3 py-1.5 text-cream-muted font-medium w-6">#</th>
@@ -43,6 +44,28 @@ export default function CourseTable() {
                 ))}
                 </tbody>
             </table>
+
+            {/* Mobile: card list */}
+            <div className="md:hidden divide-y divide-border/30">
+                {courses.map((c, i) => (
+                    <div key={c.id} className={`px-3.5 py-3 ${i % 2 === 0 ? '' : 'bg-stripe/40'}`}>
+                        <div className="flex items-start justify-between gap-2">
+                            <div className="flex items-baseline gap-2 min-w-0">
+                                <span className="text-cream-muted font-mono text-[10px] shrink-0">{c.id}</span>
+                                <span className="text-cream font-medium text-[12.5px] leading-snug">{c.name}</span>
+                            </div>
+                            <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-border/40 text-cream-muted hover:text-clay-light hover:bg-clay/10 transition-colors cursor-pointer shrink-0">
+                                <ArrowSquareOut className="w-3.5 h-3.5" weight="bold" />
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-3 mt-1.5 text-[10.5px]">
+                            <span className="text-amber font-mono font-semibold">{c.duration}</span>
+                            <span className="text-cream-dim">{c.lectures}</span>
+                        </div>
+                        <p className="text-cream-dim text-[10.5px] mt-1">{c.control}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
