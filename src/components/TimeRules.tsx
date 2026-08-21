@@ -10,11 +10,12 @@ export default function TimeRules() {
                     Правила тайм-менеджмента
                 </h2>
             </div>
-            <div className="grid grid-cols-7 gap-0 divide-x divide-border/40">
+            <div
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-0 divide-x divide-y divide-border/40 md:divide-y-0">
                 {timeRules.map((rule, i) => {
                     const Icon = ruleIcons[i];
                     return (
-                        <div key={i} className="px-3 py-3 text-center hover:bg-card-hover/30 transition-colors">
+                        <div key={i} className="px-2.5 py-2.5 sm:px-3 sm:py-3 text-center hover:bg-card-hover/30 transition-colors">
                             <div
                                 className="w-7 h-7 rounded-md bg-border/40 flex items-center justify-center mx-auto mb-1">
                                 <Icon className="w-4 h-4 text-amber" weight="duotone"/>
