@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import type {ReactNode, RefObject} from 'react';
-import {BookOpenText, Check, CheckCircle} from './icons';
+import {BookOpenText, Check, CheckCircle, Code, Copy} from './icons';
 import {useLocalStorageState} from '../hooks/useLocalStorageState';
 import {cn} from '../utils/cn';
 
@@ -202,11 +202,98 @@ function NotesCard({weekNumber, readOnly}: WidgetProps) {
     );
 }
 
+function SnippetCard({weekNumber, readOnly}: WidgetProps) {
+    const keys = storageKeys(weekNumber);
+    const [savedCode, setSavedCode] = useLocalStorageState<string>(keys.snippet, '');
+    const [lang, setLang] = useLocalStorageState<string>(keys.snippetLang, 'tsx');
+    const [draft, setDraft] = useState(savedCode);
+    const [langDraft, setLangDraft] = useState(lang);
+    const [justSaved, setJustSaved] = useState(false);
+    const [copyLabel, setCopyLabel] = useState('Копировать');
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    useAutosize(textareaRef, draft);
+
+    useEffect(() => {
+        if (draft === savedCode) return;
+        const timeout = window.setTimeout(() => {
+            setSavedCode(draft);
+            setJustSaved(true);
+        }, 400);
+        return () => window.clearTimeout(timeout);
+    }, [draft, savedCode, setSavedCode]);
+
+    useEffect(() => {
+        if (!justSaved) return;
+        const timeout = window.setTimeout(() => setJustSaved(false), 1200);
+        return () => window.clearTimeout(timeout);
+    }, [justSaved]);
+
+    const commitLang = () => {
+        if (langDraft !== lang) setLang(langDraft);
+    };
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(draft);
+            setCopyLabel('Скопировано');
+        } catch {
+            setCopyLabel('Ошибка');
+        }
+        window.setTimeout(() => setCopyLabel('Копировать'), 1200);
+    };
+
+    if (readOnly) {
+        return (
+            <WidgetCard icon={<Code className="w-3.5 h-3.5" weight="duotone"/>} title="Code Snippets">
+                <div className="text-[9px] text-amber mb-1.5">{lang}</div>
+                <div className="font-mono text-[9.5px] text-cream-dim whitespace-pre-wrap leading-relaxed">
+                    {savedCode || <span className="text-cream-muted">— пусто —</span>}
+                </div>
+            </WidgetCard>
+        );
+    }
+
+    return (
+        <WidgetCard
+            icon={<Code className="w-3.5 h-3.5" weight="duotone"/>}
+            title="Code Snippets"
+            trailing={<SavedFlag show={justSaved}/>}
+        >
+            <textarea
+                ref={textareaRef}
+                value={draft}
+                onChange={e => setDraft(e.target.value)}
+                placeholder="// ваш код здесь..."
+                rows={3}
+                className="w-full resize-none overflow-hidden bg-code border border-border/50 rounded-md text-cream-dim placeholder:text-cream-muted/60 font-mono text-[9.5px] leading-relaxed px-2.5 py-2 focus:outline-none focus:border-clay-dim"
+            />
+            <div className="flex items-center justify-between gap-1.5 mt-1.5">
+                <input
+                    value={langDraft}
+                    onChange={e => setLangDraft(e.target.value)}
+                    onBlur={commitLang}
+                    spellCheck={false}
+                    className="w-16 text-center font-mono text-[9px] text-amber bg-stripe border border-border-light rounded px-1.5 py-0.5 focus:outline-none focus:border-clay-dim"
+                />
+                <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="flex items-center gap-1 text-[9.5px] text-cream-muted bg-cream/5 border border-border-light rounded-md px-2 py-1 hover:text-clay-light hover:border-clay/40 transition-colors"
+                >
+                    <Copy className="w-[11px] h-[11px]"/>
+                    {copyLabel}
+                </button>
+            </div>
+        </WidgetCard>
+    );
+}
+
 export default function WeekWidgets({weekNumber, readOnly = false}: { weekNumber: number; readOnly?: boolean }) {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-3">
             <ChecklistCard weekNumber={weekNumber} readOnly={readOnly}/>
             <NotesCard weekNumber={weekNumber} readOnly={readOnly}/>
+            <SnippetCard weekNumber={weekNumber} readOnly={readOnly}/>
         </div>
     );
 }
