@@ -1,5 +1,6 @@
-import {CheckCircle, Code, BookOpenText, ResultIcon, TopicIcon} from './icons';
+import {ResultIcon, TopicIcon} from './icons';
 import type {WeekSchedule} from '../data/schedule';
+import WeekWidgets from './WeekWidgets';
 
 const trackColors: Record<string, { bg: string; text: string; border: string }> = {
     'Claude Code': {bg: 'bg-clay/10', text: 'text-clay-light', border: 'border-clay/25'},
@@ -10,7 +11,7 @@ const trackColors: Record<string, { bg: string; text: string; border: string }> 
     Integration: {bg: 'bg-purple-accent/10', text: 'text-purple-accent', border: 'border-purple-accent/25'},
 };
 
-export default function WeekPage({week}: { week: WeekSchedule }) {
+export default function WeekPage({week, readOnly = false}: { week: WeekSchedule; readOnly?: boolean }) {
     const colors = trackColors[week.track] ?? trackColors['Claude Code'];
 
     return (
@@ -176,47 +177,7 @@ export default function WeekPage({week}: { week: WeekSchedule }) {
                 </table>
             </div>
 
-            {/* Bottom: Checklist + Notes + Code Snippets */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-3"> {/* Increased gap and margin */}
-                <div className="rounded-lg border border-border bg-card/40 px-3.5 py-3"> {/* Increased inner padding */}
-                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                        <CheckCircle className="w-3.5 h-3.5" weight="duotone"/> Чек-лист дня
-                    </h3>
-                    <div className="space-y-1.5">
-                        {['Теория (видео/лекция)', 'Практика на проекте', 'Коммит / push', 'Заметки и snippets'].map(
-                            (item, idx) => (
-                                <label
-                                    key={idx}
-                                    className="flex items-center gap-1.5 text-[10px] text-cream-dim cursor-pointer group"
-                                >
-                                    <span
-                                        className="w-3.5 h-3.5 rounded border border-border-light bg-stripe flex items-center justify-center shrink-0 group-hover:border-clay/50 transition-colors"/>
-                                    {item}
-                                </label>
-                            )
-                        )}
-                    </div>
-                </div>
-                <div className="rounded-lg border border-border bg-card/40 px-3.5 py-3"> {/* Increased inner padding */}
-                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                        <BookOpenText className="w-3.5 h-3.5" weight="duotone"/> Заметки
-                    </h3>
-                    <div className="space-y-[8px]">
-                        {[1, 2, 3].map(l => (
-                            <div key={l} className="h-3.5 border-b border-border/25 border-dashed"/>
-                        ))}
-                    </div>
-                </div>
-                <div className="rounded-lg border border-border bg-card/40 px-3.5 py-3"> {/* Increased inner padding */}
-                    <h3 className="text-[10px] font-semibold text-cream-muted uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                        <Code className="w-3.5 h-3.5" weight="duotone"/> Code Snippets
-                    </h3>
-                    <div
-                        className="font-mono text-[9px] text-cream-muted bg-code rounded px-2.5 py-2 border border-border/30 leading-relaxed min-h-[46px]">
-                        <span className="opacity-50">// your code here...</span>
-                    </div>
-                </div>
-            </div>
+            <WeekWidgets key={week.weekNumber} weekNumber={week.weekNumber} readOnly={readOnly}/>
         </div>
     );
 }
