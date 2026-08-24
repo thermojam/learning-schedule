@@ -218,7 +218,7 @@ export default function App() {
                         <PageHeader
                             subtitle={`Неделя ${week.weekNumber} из 6 • ${week.dateRange} • ${week.title}`}
                         />
-                        <WeekPage week={week}/>
+                        <WeekPage week={week} readOnly/>
                     </div>
                 ))}
             </div>
