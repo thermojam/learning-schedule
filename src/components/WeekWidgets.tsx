@@ -157,6 +157,10 @@ function NotesCard({weekNumber, readOnly}: WidgetProps) {
     const [justSaved, setJustSaved] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useAutosize(textareaRef, draft);
+    const draftRef = useRef(draft);
+    useEffect(() => {
+        draftRef.current = draft;
+    }, [draft]);
 
     useEffect(() => {
         if (draft === saved) return;
@@ -166,6 +170,12 @@ function NotesCard({weekNumber, readOnly}: WidgetProps) {
         }, 400);
         return () => window.clearTimeout(timeout);
     }, [draft, saved, setSaved]);
+
+    useEffect(() => {
+        // Flush any not-yet-debounced edit on unmount (e.g. switching weeks
+        // mid-typing) so the last <400ms of typing isn't silently dropped.
+        return () => setSaved(draftRef.current);
+    }, [setSaved]);
 
     useEffect(() => {
         if (!justSaved) return;
@@ -212,6 +222,10 @@ function SnippetCard({weekNumber, readOnly}: WidgetProps) {
     const [copyLabel, setCopyLabel] = useState('Копировать');
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useAutosize(textareaRef, draft);
+    const draftRef = useRef(draft);
+    useEffect(() => {
+        draftRef.current = draft;
+    }, [draft]);
 
     useEffect(() => {
         if (draft === savedCode) return;
@@ -221,6 +235,12 @@ function SnippetCard({weekNumber, readOnly}: WidgetProps) {
         }, 400);
         return () => window.clearTimeout(timeout);
     }, [draft, savedCode, setSavedCode]);
+
+    useEffect(() => {
+        // Flush any not-yet-debounced edit on unmount (e.g. switching weeks
+        // mid-typing) so the last <400ms of typing isn't silently dropped.
+        return () => setSavedCode(draftRef.current);
+    }, [setSavedCode]);
 
     useEffect(() => {
         if (!justSaved) return;

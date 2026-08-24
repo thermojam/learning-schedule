@@ -105,6 +105,14 @@ export default function App() {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement | null;
+            const isTextEntryField =
+                target?.tagName === 'TEXTAREA' ||
+                target?.isContentEditable ||
+                (target?.tagName === 'INPUT' && !['checkbox', 'radio'].includes((target as HTMLInputElement).type));
+            if (isTextEntryField) {
+                return;
+            }
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                 e.preventDefault();
                 goTo(currentPage + 1);
