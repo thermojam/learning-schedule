@@ -1,4 +1,4 @@
-import {ruleIcons} from './icons';
+import {ruleIcons} from './iconRegistry';
 import {timeRules} from '../data/schedule';
 
 export default function TimeRules() {
