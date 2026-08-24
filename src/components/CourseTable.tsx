@@ -36,9 +36,15 @@ export default function CourseTable() {
                         <td className="px-3 py-2 text-cream-dim">{c.lectures}</td>
                         <td className="px-3 py-2 text-cream-dim">{c.control}</td>
                         <td className="px-3 py-2 text-center">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-border/40 text-cream-muted hover:text-clay-light hover:bg-clay/10 transition-colors cursor-pointer">
+                <a
+                    href={c.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Открыть курс «${c.name}»`}
+                    className="inline-flex items-center justify-center w-6 h-6 rounded bg-border/40 text-cream-muted hover:text-clay-light hover:bg-clay/10 transition-colors cursor-pointer"
+                >
                   <ArrowSquareOut className="w-3.5 h-3.5" weight="bold" />
-                </span>
+                </a>
                         </td>
                     </tr>
                 ))}
@@ -54,9 +60,15 @@ export default function CourseTable() {
                                 <span className="text-cream-muted font-mono text-[10px] shrink-0">{c.id}</span>
                                 <span className="text-cream font-medium text-[12.5px] leading-snug">{c.name}</span>
                             </div>
-                            <span className="inline-flex items-center justify-center w-6 h-6 rounded bg-border/40 text-cream-muted hover:text-clay-light hover:bg-clay/10 transition-colors cursor-pointer shrink-0">
+                            <a
+                                href={c.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Открыть курс «${c.name}»`}
+                                className="inline-flex items-center justify-center w-6 h-6 rounded bg-border/40 text-cream-muted hover:text-clay-light hover:bg-clay/10 transition-colors cursor-pointer shrink-0"
+                            >
                                 <ArrowSquareOut className="w-3.5 h-3.5" weight="bold" />
-                            </span>
+                            </a>
                         </div>
                         <div className="flex items-center gap-3 mt-1.5 text-[10.5px]">
                             <span className="text-amber font-mono font-semibold">{c.duration}</span>

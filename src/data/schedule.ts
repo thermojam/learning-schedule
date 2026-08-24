@@ -43,12 +43,12 @@ export interface TimeRule {
 }
 
 export const courses: Course[] = [
-    { id: 1, name: 'Claude Code 101', platform: 'Skilljar', duration: '1.5 ч', lectures: '12 лекций', control: 'quiz + сертификат', link: 'anthropic.skilljar.com' },
-    { id: 2, name: 'Claude Code in Action', platform: 'Skilljar', duration: '1 ч', lectures: '15 лекций', control: 'quiz + сертификат', link: 'anthropic.skilljar.com' },
-    { id: 3, name: 'Building with the Claude API', platform: 'Skilljar', duration: '8.1 ч', lectures: '84 лекции', control: '10 quizzes + сертификат', link: 'anthropic.skilljar.com' },
-    { id: 4, name: 'AI Fluency for Small Businesses', platform: 'Skilljar', duration: '0.9 ч', lectures: '9 лекций', control: 'quiz + сертификат', link: 'anthropic.skilljar.com' },
-    { id: 5, name: 'Introduction to MCP', platform: 'Skilljar', duration: '1 ч', lectures: '16 лекций', control: 'quiz + сертификат', link: 'anthropic.skilljar.com' },
-    { id: 6, name: 'MCP: Advanced Topics', platform: 'Skilljar', duration: '1.1 ч', lectures: '15 лекций', control: '2 quizzes + сертификат', link: 'anthropic.skilljar.com' },
+    { id: 1, name: 'Claude Code 101', platform: 'Claude Academy', duration: '1.5 ч', lectures: '12 лекций', control: 'quiz + сертификат', link: 'https://academy.claude.com/courses/claude-code-101' },
+    { id: 2, name: 'Claude Code in Action', platform: 'Claude Academy', duration: '1 ч', lectures: '15 лекций', control: 'quiz + сертификат', link: 'https://academy.claude.com/courses/claude-code-in-action' },
+    { id: 3, name: 'Building with the Claude API', platform: 'Claude Academy', duration: '8.1 ч', lectures: '84 лекции', control: '10 quizzes + сертификат', link: 'https://academy.claude.com/courses/building-with-the-claude-api' },
+    { id: 4, name: 'AI Fluency for Small Businesses', platform: 'Claude Academy', duration: '0.9 ч', lectures: '9 лекций', control: 'quiz + сертификат', link: 'https://academy.claude.com/courses/ai-fluency-for-small-businesses' },
+    { id: 5, name: 'Introduction to MCP', platform: 'Claude Academy', duration: '1 ч', lectures: '16 лекций', control: 'quiz + сертификат', link: 'https://academy.claude.com/courses/introduction-to-model-context-protocol' },
+    { id: 6, name: 'MCP: Advanced Topics', platform: 'Claude Academy', duration: '1.1 ч', lectures: '15 лекций', control: '2 quizzes + сертификат', link: 'https://academy.claude.com/courses/model-context-protocol-advanced-topics' },
 ];
 
 export const timeRules: TimeRule[] = [

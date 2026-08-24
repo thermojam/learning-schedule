@@ -3,39 +3,33 @@
  *
  * Every icon in the app funnels through this file so the icon set stays
  * consistent and can be swapped in one place. No emoji anywhere in the UI.
+ *
+ * The `topicIcons`/`ruleIcons` name→component lookup maps live in
+ * `./iconRegistry` rather than here — `react-refresh/only-export-components`
+ * requires a file that exports components to export only components, and
+ * those maps are plain data. Add new topical/rule icons there.
  */
 import {
-    ArrowsClockwise,
     ArrowSquareOut,
-    Brain,
     BookOpenText,
     CalendarBlank,
     CaretLeft,
     CaretRight,
     Certificate,
+    Check,
     CheckCircle,
-    Clock,
     Code,
-    Coffee,
-    Eye,
-    Fire,
-    Lightning,
-    ListChecks,
+    Copy,
     Moon,
-    Plugs,
     Printer,
-    PuzzlePiece,
-    RocketLaunch,
-    ShieldCheck,
     Sparkle,
     SquaresFour,
     Star,
     Sun,
-    Target,
-    Trophy,
-    Wrench,
 } from '@phosphor-icons/react';
 import type { IconWeight } from '@phosphor-icons/react';
+import { topicIcons } from './iconRegistry';
+import type { TopicIconName } from './iconRegistry';
 
 /* ---------- UI chrome icons (re-exported directly) ---------- */
 export {
@@ -45,8 +39,10 @@ export {
     CaretLeft,
     CaretRight,
     Certificate,
+    Check,
     CheckCircle,
     Code,
+    Copy,
     Moon,
     Printer,
     Sparkle,
@@ -55,20 +51,7 @@ export {
     Sun,
 };
 
-/* ---------- Topical icons (replace former emoji) ---------- */
-export const topicIcons = {
-    lightning: Lightning,
-    plugs: Plugs,
-    eye: Eye,
-    fire: Fire,
-    puzzle: PuzzlePiece,
-    trophy: Trophy,
-    target: Target,
-    wrench: Wrench,
-    rocket: RocketLaunch,
-} as const;
-
-export type TopicIconName = keyof typeof topicIcons;
+export type { TopicIconName };
 
 interface TopicIconProps {
     name: TopicIconName;
@@ -80,17 +63,6 @@ export function TopicIcon({ name, className, weight = 'duotone' }: TopicIconProp
     const Component = topicIcons[name];
     return <Component className={className} weight={weight} />;
 }
-
-/* ---------- Time-management rule icons (ordered) ---------- */
-export const ruleIcons = [
-    Clock,
-    Brain,
-    Lightning,
-    Coffee,
-    ShieldCheck,
-    ListChecks,
-    ArrowsClockwise,
-] as const;
 
 /* ---------- Result badge icons ---------- */
 export type ResultIconName = 'cert' | 'check' | 'star' | 'rest';
